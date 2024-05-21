@@ -1,0 +1,13 @@
+What aspects are we covering in this example of an RTOS
+
+1. Thread Management: The code defines a structure called ThreadControlBlock to store information about each thread, including the thread function, priority, remaining time, thread ID, waiting state, and state. The code initializes and manages two threads (thread1_func and thread2_func). The current_thread variable keeps track of the currently executing thread. The kernel_thread_scheduler function implements the thread scheduling algorithm based on thread priorities and states.
+
+2. Context Switching: The code includes a yield function that performs a context switch to the next thread. Context switching allows different threads to execute in a cooperative manner, ensuring fairness and giving each thread a chance to run.
+
+3. Semaphore Implementation: The code defines a Semaphore structure and provides functions (semaphore_init, semaphore_acquire, semaphore_release) to initialize, acquire, and release a semaphore. Semaphores are used to control access to shared resources, in this case, the LED. The code demonstrates the correct usage of semaphores by acquiring and releasing the semaphore before and after accessing the LED.
+
+4. Timer Interrupt: The code sets up a timer interrupt (tick_handler) that triggers periodically. This interrupt is used for the RTOS kernel tick, which is responsible for managing the execution time of threads and resetting their remaining time. The interrupt handler iterates through the thread control blocks and updates the remaining time of each thread based on its priority.
+
+5. Thread States: The code defines an enumeration ThreadState to represent the states of a thread (THREAD_RUNNING, THREAD_SUSPENDED, THREAD_TERMINATED). The thread functions (thread_1 and thread_2) check the state of the current thread before executing their code. The code also prints the state of the thread before and after acquiring/releasing the semaphore, allowing observation and verification of the thread states.
+
+6. Initialization and Termination: The init_threads function initializes the thread control blocks with the required information for each thread. The code handles the termination of threads by checking the thread state and either continuing to the next iteration or printing a termination message.
